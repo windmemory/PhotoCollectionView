@@ -13,6 +13,8 @@
 		A295D7E019CEA0DC000BEE14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A295D7DF19CEA0DC000BEE14 /* Images.xcassets */; };
 		A295D7E319CEA0DC000BEE14 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A295D7E119CEA0DC000BEE14 /* LaunchScreen.xib */; };
 		A295D7EF19CEA0DC000BEE14 /* PhotoCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A295D7EE19CEA0DC000BEE14 /* PhotoCollectionViewTests.swift */; };
+		A295D7F919CEA56C000BEE14 /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A295D7F819CEA56C000BEE14 /* PhotoCollectionView.swift */; };
+		A295D7FB19CEA6AE000BEE14 /* ZoomablePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A295D7FA19CEA6AE000BEE14 /* ZoomablePhotoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		A295D7E819CEA0DC000BEE14 /* PhotoCollectionViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoCollectionViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A295D7ED19CEA0DC000BEE14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A295D7EE19CEA0DC000BEE14 /* PhotoCollectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewTests.swift; sourceTree = "<group>"; };
+		A295D7F819CEA56C000BEE14 /* PhotoCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
+		A295D7FA19CEA6AE000BEE14 /* ZoomablePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomablePhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 			children = (
 				A295D7D819CEA0DC000BEE14 /* AppDelegate.swift */,
 				A295D7DA19CEA0DC000BEE14 /* ViewController.swift */,
+				A295D7F819CEA56C000BEE14 /* PhotoCollectionView.swift */,
+				A295D7FA19CEA6AE000BEE14 /* ZoomablePhotoView.swift */,
 				A295D7DC19CEA0DC000BEE14 /* Main.storyboard */,
 				A295D7DF19CEA0DC000BEE14 /* Images.xcassets */,
 				A295D7E119CEA0DC000BEE14 /* LaunchScreen.xib */,
@@ -212,7 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A295D7FB19CEA6AE000BEE14 /* ZoomablePhotoView.swift in Sources */,
 				A295D7DB19CEA0DC000BEE14 /* ViewController.swift in Sources */,
+				A295D7F919CEA56C000BEE14 /* PhotoCollectionView.swift in Sources */,
 				A295D7D919CEA0DC000BEE14 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
