@@ -18,7 +18,7 @@ class PhotoCollevtionView: UIView, UIScrollViewDelegate {
     private var imageViewArray : NSArray
     private var contentView = UIScrollView()
     
-    init(outerFrame: CGRect, photoArray: NSArray, currentNumber: Int) {
+    init(outerFrame: CGRect, photoArray: NSArray, currentNumber: Int = 0) {
         photosArray = photoArray
         currentPhoto = currentNumber
         
