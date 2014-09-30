@@ -4,7 +4,7 @@ This view helps you display your photos and developed using swift. It's almost l
 
 ###Demo
 
-
+[Click here to see the demo](http://youtu.be/3_liToyJqXc)
 
 ###How to use
 Copy `PhotoCollectionView.swift` and `ZoomablePhotoView.swift` to your project.
