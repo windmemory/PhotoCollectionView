@@ -17,8 +17,9 @@ class PhotoCollevtionView: UIView, UIScrollViewDelegate {
     private var currentViewNumber = 1
     private var imageViewArray : NSArray
     private var contentView = UIScrollView()
+    private var userDragged = false
     
-    init(outerFrame: CGRect, photoArray: NSArray, currentNumber: Int = 0) {
+    init(outerFrame: CGRect, photoArray: NSArray, currentNumber: Int = 1) {
         photosArray = photoArray
         currentPhoto = currentNumber
         
@@ -26,9 +27,12 @@ class PhotoCollevtionView: UIView, UIScrollViewDelegate {
         if (photosArray.count == 1){
             imageViewArray = NSArray(array: [ZoomablePhotoView(picture: photosArray[0] as UIImage, frame: outerFrame)])
             currentViewNumber = 0
+            (imageViewArray[0] as ZoomablePhotoView).pageNumber = 0
         }else if (photosArray.count == 2){
             imageViewArray = NSArray(array: [ZoomablePhotoView(picture: photosArray[0] as UIImage, frame: outerFrame), ZoomablePhotoView(picture: photosArray[1] as UIImage, frame: outerFrame)])
             currentViewNumber = currentPhoto
+            (imageViewArray[0] as ZoomablePhotoView).pageNumber = 0
+            (imageViewArray[1] as ZoomablePhotoView).pageNumber = 1
         }else{
             if (currentNumber == 0){
                 imageViewArray = NSArray(array: [ZoomablePhotoView(picture: photosArray[0] as UIImage, frame: outerFrame), ZoomablePhotoView(picture: photosArray[1] as UIImage, frame: outerFrame), ZoomablePhotoView(picture: photosArray[2] as UIImage, frame: outerFrame)])
@@ -82,43 +86,43 @@ class PhotoCollevtionView: UIView, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        if (imageViewArray.count == 3){
-//            currentPhoto = Int(contentView.contentOffset.x / contentView.frame.width)
-//            currentViewNumber = currentPhoto % 3
-        }else{
-            if (contentView.contentOffset.x > 0){
-                currentViewNumber = 1
-            }else{
-                currentViewNumber = 0
-            }
-        }
+        userDragged = false
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        userDragged = true
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if contentView.contentOffset.x > (0.7 * contentView.frame.width + imageViewArray[currentViewNumber].frame.origin.x){
-            currentViewNumber = (currentViewNumber + 1) % 3
-            currentPhoto += 1
-            if currentPhoto < photosArray.count - 1{
-                (imageViewArray[(currentViewNumber + 1) % 3] as ZoomablePhotoView).pageNumber = (currentPhoto + 1)
-                (imageViewArray[(currentViewNumber + 1) % 3] as ZoomablePhotoView).assignPhoto(picture: photosArray[currentPhoto + 1] as UIImage)
-                (imageViewArray[(currentViewNumber + 1) % 3] as ZoomablePhotoView).frame.origin = CGPoint(x: (CGFloat)(currentPhoto + 1) * contentView.frame.width + halfPhotoGap, y: 0)
+        
+        if (userDragged){
+            if contentView.contentOffset.x > (0.7 * contentView.frame.width + imageViewArray[currentViewNumber].frame.origin.x){
+                currentViewNumber = (currentViewNumber + 1) % 3
+                currentPhoto++
+                if currentPhoto < photosArray.count - 1{
+                    (imageViewArray[(currentViewNumber + 1) % 3] as ZoomablePhotoView).pageNumber = (currentPhoto + 1)
+                    (imageViewArray[(currentViewNumber + 1) % 3] as ZoomablePhotoView).assignPhoto(picture: photosArray[currentPhoto + 1] as UIImage)
+                    (imageViewArray[(currentViewNumber + 1) % 3] as ZoomablePhotoView).frame.origin = CGPoint(x: (CGFloat)(currentPhoto + 1) * contentView.frame.width + halfPhotoGap, y: 0)
+                }
+                
+            }else if contentView.contentOffset.x < (imageViewArray[currentViewNumber].frame.origin.x - 0.7 * contentView.frame.width){
+                currentViewNumber = (currentViewNumber + 2) % 3
+                currentPhoto--
+                if currentPhoto > 0{
+                    (imageViewArray[(currentViewNumber + 2) % 3] as ZoomablePhotoView).pageNumber = (currentPhoto - 1)
+                    (imageViewArray[(currentViewNumber + 2) % 3] as ZoomablePhotoView).assignPhoto(picture: photosArray[currentPhoto - 1] as UIImage)
+                    (imageViewArray[(currentViewNumber + 2) % 3] as ZoomablePhotoView).frame.origin = CGPoint(x: (CGFloat)(currentPhoto - 1) * contentView.frame.width + halfPhotoGap, y: 0)
+                }
+                
             }
-        }else if contentView.contentOffset.x < (imageViewArray[currentViewNumber].frame.origin.x - 0.7 * contentView.frame.width){
-            currentViewNumber = (currentViewNumber + 2) % 3
-            currentPhoto -= 1
-            if currentPhoto > 0{
-                (imageViewArray[(currentViewNumber + 2) % 3] as ZoomablePhotoView).pageNumber = (currentPhoto - 1)
-                (imageViewArray[(currentViewNumber + 2) % 3] as ZoomablePhotoView).assignPhoto(picture: photosArray[currentPhoto - 1] as UIImage)
-                (imageViewArray[(currentViewNumber + 2) % 3] as ZoomablePhotoView).frame.origin = CGPoint(x: (CGFloat)(currentPhoto - 1) * contentView.frame.width + halfPhotoGap, y: 0)
-            }
+            
         }
         
-//        println(contentView.contentOffset)
-//        println("scrolled!")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         for i in 0...(imageViewArray.count - 1){
             (imageViewArray[i] as ZoomablePhotoView).frame = CGRect(x: (CGFloat)((imageViewArray[i] as ZoomablePhotoView).pageNumber) * contentView.frame.width + halfPhotoGap, y: 0, width: self.frame.width, height: self.frame.height)
         }

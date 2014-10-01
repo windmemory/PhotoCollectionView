@@ -49,6 +49,7 @@ class ZoomablePhotoView: UIScrollView,UIScrollViewDelegate {
         imageView.frame.size = calculatePictureSize()
         setPictoCenter()
         self.maximumZoomScale = calculateMaximunScale()
+        isZoomed = false
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
@@ -127,8 +128,14 @@ class ZoomablePhotoView: UIScrollView,UIScrollViewDelegate {
         }
         if (!self.isFullScreen()){
             setPictoCenter()
+        }else{
+            self.clearContentInsets()
         }
         
+    }
+    
+    func clearContentInsets(){
+        self.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     required init(coder aDecoder: NSCoder) {
