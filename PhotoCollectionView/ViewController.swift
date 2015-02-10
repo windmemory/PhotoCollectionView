@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         var image5 = UIImage(named: "pic5")
         var image6 = UIImage(named: "pic6")
         var image7 = UIImage(named: "pic7")
-        var array = NSArray(array: [image1,image2,image3,image4,image5,image6,image7])
+        var array = NSArray(array: [image1!,image2!])
         view1 = PhotoCollevtionView(outerFrame: self.view.frame, photoArray: array)
         self.view.addSubview(view1!)
         // Do any additional setup after loading the view, typically from a nib.

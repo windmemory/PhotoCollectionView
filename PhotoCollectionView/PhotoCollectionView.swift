@@ -19,7 +19,7 @@ class PhotoCollevtionView: UIView, UIScrollViewDelegate {
     private var contentView = UIScrollView()
     private var userDragged = false
     
-    init(outerFrame: CGRect, photoArray: NSArray, currentNumber: Int = 1) {
+    init(outerFrame: CGRect, photoArray: NSArray, currentNumber: Int = 0) {
         photosArray = photoArray
         currentPhoto = currentNumber
         

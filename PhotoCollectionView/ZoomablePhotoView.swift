@@ -19,6 +19,10 @@ class ZoomablePhotoView: UIScrollView,UIScrollViewDelegate {
         imageView.image = assignedImage
         super.init(frame: assignedFrame)
         imageView.frame.size = calculatePictureSize()
+//        var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+//        blurView.frame = imageView.bounds
+        
+        
         setPictoCenter()
         self.delegate = self
         self.showsVerticalScrollIndicator = false
@@ -28,8 +32,10 @@ class ZoomablePhotoView: UIScrollView,UIScrollViewDelegate {
         self.maximumZoomScale = calculateMaximunScale()
         var tap = UITapGestureRecognizer(target: self, action: "tapZoom")
         tap.numberOfTapsRequired = 2
+//        self.addSubview(blurView)
         imageView.userInteractionEnabled = true
         imageView.addGestureRecognizer(tap)
+        
     }
     
     func tapZoom(){
@@ -124,13 +130,14 @@ class ZoomablePhotoView: UIScrollView,UIScrollViewDelegate {
         if (!isZoomed){
             imageView.frame.size = calculatePictureSize()
             setPictoCenter()
-            self.maximumZoomScale = calculateMaximunScale()
+            
         }
         if (!self.isFullScreen()){
             setPictoCenter()
         }else{
             self.clearContentInsets()
         }
+        self.maximumZoomScale = calculateMaximunScale()
         
     }
     
