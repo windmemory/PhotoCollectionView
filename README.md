@@ -4,7 +4,7 @@ This view helps you display your photos and developed using swift. It's almost l
 
 ###Demo
 
-[Click here to see the demo](http://youtu.be/3_liToyJqXc)
+![Demo](https://github.com/windmemory/PhotoCollectionView/blob/master/Demo/PhotoCollectionViewDemo.gif)
 
 ###How to use
 Copy `PhotoCollectionView.swift` and `ZoomablePhotoView.swift` to your project.
